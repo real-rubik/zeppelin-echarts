@@ -1,0 +1,6 @@
+{
+  "type": "VISUALIZATION",
+  "name": "zeppelin-echarts-bar",
+  "description": "Zeppelin bar charts using Echarts",
+  "license": "Apache-2.0"
+}

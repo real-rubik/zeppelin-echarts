@@ -1,0 +1,12 @@
+{
+  "name": "zeppelin-echarts-bar",
+  "version": "0.0.1",
+  "description": "Bar Chart for Apache Zeppelin using Echart template",
+  "main": "index.js",
+  "license": "Apache",
+  "dependencies": {
+    "zeppelin-vis": "*",
+    "zeppelin-tabledata": "*",
+    "echarts": "*"
+  }
+}
