@@ -1,4 +1,4 @@
-export const ColumnParameter = {
+export const InvColumnParameter = {
     'left': { valueType: 'string', defaultValue: '10', description: 'left', },
     'right': { valueType: 'string', defaultValue: '10', description: '', },
     'top': { valueType: 'string', defaultValue: '10', description: '', },
@@ -9,13 +9,13 @@ export const ColumnParameter = {
     'yAxisName': { valueType: 'string', defaultValue: '', description: 'name of yAxis', },
 };
 
-export function createDataStructure (rows) {
+export function createInvDataStructure (rows) {
     return rows.map(r => {
         return { name: r.selector.replace('(sum)',''), type: "bar", data: r.value,}
     })
 }
 
-export function createChartOption(series, parameter, keyNames, selectors) {
+export function createInvChartOption(series, parameter, keyNames, selectors) {
     const colors = ['#19d4ae', '#0067a6', '#5ab1ef', '#fa6e86', '#ffb980', '#c4b4e4'];
     const option = {
         tooltip: {
@@ -36,17 +36,12 @@ export function createChartOption(series, parameter, keyNames, selectors) {
         },
         grid : {left: '10%', right: '10%', top: '15%', bottom: '10%',},
         xAxis: {
-            type: 'category',
-            data: keyNames,
-            axisLine: {show: true, lineStyle: {color: '#ced0d3'}},
-            axisLabel: {color: '#333'}
+            type: 'values',
         },
         yAxis: [{
-                type: 'value',
-                axisTick: {show: false},
-                splitLine: {show: false},
-                axisLine: {show: false}
-            }
+            type: 'category',
+            data: keyNames
+        }
         ],
         series: series
     };

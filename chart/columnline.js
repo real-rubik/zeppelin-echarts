@@ -1,4 +1,4 @@
-export const ColumnParameter = {
+export const CLParameter = {
     'left': { valueType: 'string', defaultValue: '10', description: 'left', },
     'right': { valueType: 'string', defaultValue: '10', description: '', },
     'top': { valueType: 'string', defaultValue: '10', description: '', },
@@ -9,13 +9,25 @@ export const ColumnParameter = {
     'yAxisName': { valueType: 'string', defaultValue: '', description: 'name of yAxis', },
 };
 
-export function createDataStructure (rows) {
-    return rows.map(r => {
-        return { name: r.selector.replace('(sum)',''), type: "bar", data: r.value,}
-    })
+export function createCLDataStructure (rows, lineName) {
+    let series = [];
+    console.log(rows);
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (row.selector === lineName) {
+            series.push({name: row.selector.replace('(sum)',''), type: "line", data: row.value, yAxisIndex: 1})
+        }
+        else series.push({name: row.selector.replace('(sum)',''), type: "bar", data: row.value,});
+        console.log(series);
+    }
+    return series;
 }
 
-export function createChartOption(series, parameter, keyNames, selectors) {
+export function createCLChartOption(series, parameter, keyNames, selectors) {
+    const {
+        left, right, top, bottom,
+        xAxisName, yAxisName,xAxisUnit, yAxisUnit,
+    } = parameter;
     const colors = ['#19d4ae', '#0067a6', '#5ab1ef', '#fa6e86', '#ffb980', '#c4b4e4'];
     const option = {
         tooltip: {
@@ -34,7 +46,7 @@ export function createChartOption(series, parameter, keyNames, selectors) {
             itemHeight: 10,
             textStyle: {fontSize: 11}
         },
-        grid : {left: '10%', right: '10%', top: '15%', bottom: '10%',},
+        grid : {left: '10%', right: '10%', top: '15%', bottom: '10%'},
         xAxis: {
             type: 'category',
             data: keyNames,
@@ -42,6 +54,12 @@ export function createChartOption(series, parameter, keyNames, selectors) {
             axisLabel: {color: '#333'}
         },
         yAxis: [{
+            type: 'value',
+            axisTick: {show: false},
+            splitLine: {show: false},
+            axisLine: {show: false}
+        },
+            {
                 type: 'value',
                 axisTick: {show: false},
                 splitLine: {show: false},
@@ -53,4 +71,3 @@ export function createChartOption(series, parameter, keyNames, selectors) {
 
     return option
 }
-
