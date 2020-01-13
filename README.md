@@ -11,5 +11,6 @@ Apache Zeppelin and Apache Echarts belong to the Apache Software Foundation.
 
 # To-do Lists
 1. Expand for other types (2020-01-10 -
-  a. 
+> a. Inverted X-Y axis (2020-01-13 -
 2. Support multiple chart types (2020-01-10 -
+> a. Bar-Line chart (2020-01-12 -
